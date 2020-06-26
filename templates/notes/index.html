@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+
+
+<div class="jumbotron">
+	<h1 align='center'>Notes!</h1>
+</div>
+
+
+
+<div class='col-md-9'>
+{% if notes %}
+	{% for note in notes %}
+    <h3 class="page-header">{{note.label}}</h3>
+    <!-- <a href="{% url 'notes:addnote' %}?id={{note.id}}">{{note.label}}</a> -->
+    <!-- <a href="{% url 'notes:addnote' %}?id={{note.id}}">edit_note</a> -->
+	{{note.body|linebreaks}}
+		{% for tag in note.tags.all %}
+		{{"tag:"}}{{tag.label}}<br>{% if not forloop.last %} | {% endif %}
+        {% endfor %}
+    <a href="{% url 'notes:addnote' %}?id={{note.id}}">edit_note</a>
+    {% endfor %}
+
+{% else %}
+	<div class='alert alert-warning' align='center'>
+		<h3>No Notes Yet!</h3>
+	</div>
+{% endif %}
+</div>
+
+<div class='col-md-3'>
+    <h3 class="page-header" align='middle'>Tags</h3>
+    <ul>
+        {% if tags %}
+            {% for tag in tags %}
+            <li>{{tag.label}}</li>
+            <li><a href="{% url 'notes:tagsearch' slug=tag.slug %}">related notes</a></li>
+            {% endfor %}
+        {% else %}
+            <div class='alert alert-warning'>No tags yet!</div>
+        {% endif %}
+    </ul>
+</div>
+
+
+{% endblock body %}
