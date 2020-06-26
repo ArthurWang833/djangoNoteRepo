@@ -1,1 +1,1 @@
-web: gunicorn djangonote.wsgi
+need to rewrite
