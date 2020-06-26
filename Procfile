@@ -1,1 +1,1 @@
-web: gunicorn djangonote.wsgi
+web: gunicorn gettingstarted.wsgi --log-file -
