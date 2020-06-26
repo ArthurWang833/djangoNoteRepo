@@ -1,1 +1,1 @@
-web: gunicorn <djangonote>.wsgi --log-file -
+web: gunicorn djangonote.wsgi
